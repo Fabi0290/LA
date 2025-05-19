@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Tu amas-me?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1529257414770-1960a42d27f2?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #fff;
+      text-shadow: 1px 1px 5px #000;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+
+    #yesBtn {
+      background-color: #d6336c;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #aaa;
+      color: white;
+      position: relative;
+    }
+
+    .hearts-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 24px;
+      animation: floatUp 2s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px);
+        opacity: 0;
+      }
+    }
+
+    #response {
+      margin-top: 30px;
+      font-size: 1.8em;
+      color: #fff;
+      text-shadow: 1px 1px 5px #000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tu amas-me?</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Sim</button>
+    <button id="noBtn">Não</button>
+  </div>
+
+  <div class="hearts-container" id="hearts"></div>
+  <div id="response"></div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const heartsContainer = document.getElementById('hearts');
+    const response = document.getElementById('response');
+
+    // Botão "Não" se mexe ao passar o rato
+    noBtn.addEventListener('mouseover', () => {
+      const offsetX = (Math.random() - 0.5) * 300;
+      const offsetY = (Math.random() - 0.5) * 300;
+      noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+
+    // Clicar em "Sim"
+    yesBtn.addEventListener('click', () => {
+      response.textContent = "Eu também ❤️";
+
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '❤️';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.top = `${Math.random() * 100}%`;
+        heart.style.fontSize = `${24 + Math.random() * 20}px`;
+        heartsContainer.appendChild(heart);
+
+        // Remove após animação
+        setTimeout(() => {
+          heart.remove();
+        }, 2000);
+      }
+    });
+  </script>
+
+</body>
+</html>
